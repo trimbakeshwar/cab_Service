@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,7 @@ namespace cabService
 {
     public class CabService
     {
+       
         //total distance in minute
         public int Distance  {set; get;} 
         //total time 
@@ -16,11 +18,14 @@ namespace cabService
         public int ratePerMinute = 1;
         //minimum pay
         public int minimumFair = 5;
+        public int TotalFair { get; }
         public CabService(int distanceInKm, int minutes)
         {
-            Distance = distanceInKm;
-            TimeInMinutes = minutes;
+            this.Distance = distanceInKm;
+            this.TimeInMinutes = minutes;
+            this.TotalFair=getTotalFair();
         }
+       
         /// <summary>
         /// get total fair of journey
         /// </summary>
@@ -28,15 +33,15 @@ namespace cabService
         public int getTotalFair()
         {
             //calculate total fair
-            int TotalFair = (Distance * ratePerKm) + (TimeInMinutes * ratePerMinute);
+            int Fair = (Distance * ratePerKm) + (TimeInMinutes * ratePerMinute);
             //if total fair is less than min fair then return minimum fair otherwise return total fair
-            if(TotalFair< minimumFair)
+            if(Fair< minimumFair)
             {
                 return minimumFair;
             }
             else
             {
-                return TotalFair;
+                return Fair;
             }
         }
     }
