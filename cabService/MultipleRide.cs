@@ -15,13 +15,14 @@ namespace cabService
         public int aggregateOfTotalFair { get; }
         //geting TotalNumberOfRides
         public int TotalNumberOfRides { get; }
-        public MultipleRide(int[] DistanceArray, int[] muinetArray)
+        public MultipleRide(int[] DistanceArray, int[] muinetArray,int[] forPremiumorNormal,string[] userid)
         {
+           
             //add all dist and rides in array list by loop
             //creating object of distance and muinet by using single cab service
             for (int i = 0; i < muinetArray.Length; i++)
             {
-                list.Add(new CabService(DistanceArray[i], muinetArray[i]));
+                list.Add(new CabService(DistanceArray[i], muinetArray[i], forPremiumorNormal[i],userid[i]));
             }
             //getting multiple rides total amount
             totalFair = getMultipleTotalFair();
@@ -54,5 +55,6 @@ namespace cabService
             int aggregateMoney = totalFair / TotalNumberOfRides;
             return aggregateMoney;
         }
+       
     }
 }

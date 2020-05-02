@@ -13,17 +13,53 @@ namespace cabService
         //total time 
         public int TimeInMinutes {set; get;}
         //rate per km 
-        public int ratePerKm = 10;
+        public int ratePerKm;
         //rate per minute
-        public int ratePerMinute = 1;
+        public int ratePerMinute;
         //minimum pay
-        public int minimumFair = 5;
+        public int minimumFair;
         public int TotalFair { get; }
-        public CabService(int distanceInKm, int minutes)
+        public string UserId { set; get; }
+        public CabService(int distanceInKm, int minutes, int normalOrPrimiun,string userid)
         {
             this.Distance = distanceInKm;
             this.TimeInMinutes = minutes;
-            this.TotalFair=getTotalFair();
+            this.UserId = userid;
+            //initialize for normal ride
+            try
+            {
+                if (normalOrPrimiun == 0)
+                {
+                    //rate per km
+                    ratePerKm = 10;
+                    //rate per minute
+                    ratePerMinute = 1;
+                    //minimum pay
+                    minimumFair = 5;
+                }
+                //initalize for premium ride
+                else if (normalOrPrimiun == 1)
+                {
+                    //rate per km
+                    ratePerKm = 15;
+                    //rate per minute
+                    ratePerMinute = 2;
+                    //minimum pay
+                    minimumFair = 20;
+                }
+                else
+                {
+                    throw new Exception("not a valid input");
+                }
+               
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+               
+            }
+
+            this.TotalFair = getTotalFair();
         }
        
         /// <summary>
@@ -39,10 +75,10 @@ namespace cabService
             {
                 return minimumFair;
             }
-            else
-            {
+            
                 return Fair;
-            }
+            
         }
+       
     }
 }
