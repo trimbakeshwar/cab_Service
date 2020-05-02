@@ -6,7 +6,9 @@ namespace cabService
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            CabService service = new CabService(10, 15);
+            int totalpay = service.getTotalFair();
+            Console.WriteLine("total pay : " + totalpay);
         }
     }
 }
