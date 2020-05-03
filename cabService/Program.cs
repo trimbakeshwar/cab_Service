@@ -31,6 +31,17 @@ namespace cabService
             int totalride = ride.TotalNumberOfRides;
             //int totalpay = service.getTotalFair();
             Console.WriteLine("total pay : " + totalAmunt+"\n avg pay : "+ avgamount+"\n total rides : " + totalride);
+            //total number of rides
+            var CountRides = ride.getAllRides("suraj");
+            var DetailInformation = CountRides.Item1;
+            Console.WriteLine("userid"+"suraj");
+
+            foreach (CabService data in DetailInformation)
+            {
+               
+                Console.WriteLine(data.TotalFair);
+              
+            }
         }
     }
 }

@@ -15,6 +15,11 @@ namespace cabService
         public int aggregateOfTotalFair { get; }
         //geting TotalNumberOfRides
         public int TotalNumberOfRides { get; }
+
+        public void setRides(int Distance, int muinet, int forPremiumorNormal, string userid)
+        {
+            list.Add(new CabService(Distance, muinet, forPremiumorNormal, userid));
+        }
         public MultipleRide(int[] DistanceArray, int[] muinetArray,int[] forPremiumorNormal,string[] userid)
         {
            
@@ -55,6 +60,21 @@ namespace cabService
             int aggregateMoney = totalFair / TotalNumberOfRides;
             return aggregateMoney;
         }
-       
+       public dynamic getAllRides(string UId)
+        {
+            int CountOfRide = 0;
+            List<CabService> detailOfUser = new List<CabService>();
+            foreach (CabService data in list)
+            {
+               
+                if (UId.Equals(data.UserId))
+                {
+                    CountOfRide++;
+                    detailOfUser.Add(data);
+                   
+                }
+            }
+            return (detailOfUser,CountOfRide);
+        }
     }
 }

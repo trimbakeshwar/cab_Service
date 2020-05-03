@@ -106,5 +106,28 @@ namespace TestForCabServices
             Assert.AreEqual(4, totalride);
 
         }
+        /// <summary>
+        /// test for number of rides according to user
+        /// </summary>
+        [Test]
+        public void TestForMultipleRidesNumberOfRidesOfUser()
+        {
+            //array of distance
+            int[] dist = { 10, 10, 10, 10 };
+            //array of minutes
+            int[] min = { 15, 15, 15, 15 };
+            //primium or normal is store in list
+            int[] forPremiumorNormal = { 1, 0, 1, 1, 0 };
+            //user id store in list
+            string[] id = { "suraj", "dhiraj", "suraj", "suraj", };
+            //create constructor for initialize and operaton
+            MultipleRide ride = new MultipleRide(dist, min, forPremiumorNormal, id);
+            //total number of rides
+            var CountRides = ride.getAllRides("suraj");
+            int totalride = CountRides.Item2;
+            //check with expected output
+            Assert.AreEqual(3, totalride);
+
+        }
     }
 }
