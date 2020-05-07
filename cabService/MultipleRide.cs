@@ -15,11 +15,26 @@ namespace cabService
         public int aggregateOfTotalFair { get; }
         //geting TotalNumberOfRides
         public int TotalNumberOfRides { get; }
-
-        public void setRides(int Distance, int muinet, int forPremiumorNormal, string userid)
+        /// <summary>
+        /// add rides one by one in arraylist
+        /// </summary>
+        /// <param name="Distance"> how much distance u travle</param>
+        /// <param name="muinet"> how much time require</param>
+        /// <param name="forPremiumorNormal"> 1 for primiun 0 for normal ride</param>
+        /// <param name="userid">user id for travler</param>
+        
+            //add all information as object in array list
+        public void AddRides(int Distance, int muinet, int forPremiumorNormal, string userid)
         {
             list.Add(new CabService(Distance, muinet, forPremiumorNormal, userid));
         }
+        /// <summary>
+        /// add multiple rides at a time
+        /// </summary>
+        /// <param name="DistanceArray">array of distance</param>
+        /// <param name="muinetArray">muinit array </param>
+        /// <param name="forPremiumorNormal"> 1 for primium o for normal</param>
+        /// <param name="userid"></param>
         public MultipleRide(int[] DistanceArray, int[] muinetArray,int[] forPremiumorNormal,string[] userid)
         {
            
@@ -60,21 +75,39 @@ namespace cabService
             int aggregateMoney = totalFair / TotalNumberOfRides;
             return aggregateMoney;
         }
+        /// <summary>
+        /// get all rides information regarding user
+        /// </summary>
+        /// <param name="UId">user id</param>
+        /// <returns></returns>
        public dynamic getAllRides(string UId)
         {
-            int CountOfRide = 0;
-            List<CabService> detailOfUser = new List<CabService>();
-            foreach (CabService data in list)
+            try 
             {
-               
-                if (UId.Equals(data.UserId))
+                int CountOfRide = 0;
+                //list for add user id travling information in list
+                List<CabService> detailOfUser = new List<CabService>();
+                //get one by one record by loop
+                foreach (CabService data in list)
                 {
-                    CountOfRide++;
-                    detailOfUser.Add(data);
-                   
+                    //if uid match with parameter uid then add all information in list  
+                    if (UId.Equals(data.UserId))
+                    {
+                        //count number of rides
+                        CountOfRide++;
+                        //add matching uid information in list
+                        detailOfUser.Add(data);
+
+                    }
                 }
+                //return information and count of rides
+                return (detailOfUser, CountOfRide);
             }
-            return (detailOfUser,CountOfRide);
+            catch(Exception e)
+            {
+                throw new Exception(e.Message); 
+            }
+            
         }
     }
 }

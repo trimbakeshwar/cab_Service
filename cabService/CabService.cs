@@ -49,14 +49,15 @@ namespace cabService
                 }
                 else
                 {
-                    throw new Exception("not a valid input");
+                    //if user send other value expected 0 or 1 then throw exceptio 
+                    throw new cabInoviceException(cabInoviceException.ExceptionType.ENTER_PROPER_INPUT, "enter 1 or 0");
                 }
                
             }
-            catch(Exception e)
+            catch(cabInoviceException e)
             {
                 Console.WriteLine(e.Message);
-               
+      
             }
 
             this.TotalFair = getTotalFair();
@@ -66,18 +67,34 @@ namespace cabService
         /// get total fair of journey
         /// </summary>
         /// <returns></returns>
-        public int getTotalFair()
+        public dynamic getTotalFair()
         {
-            //calculate total fair
-            int Fair = (Distance * ratePerKm) + (TimeInMinutes * ratePerMinute);
-            //if total fair is less than min fair then return minimum fair otherwise return total fair
-            if(Fair< minimumFair)
+            try
             {
-                return minimumFair;
-            }
-            
+                //calculate total fair
+                int Fair = (Distance * ratePerKm) + (TimeInMinutes * ratePerMinute);
+                //if total fair is less than min fair then return minimum fair otherwise return total fair
+                if (Fair < minimumFair)
+                {
+                    return minimumFair;
+                }
+                if(Distance==0)
+                {
+                    throw new cabInoviceException(cabInoviceException.ExceptionType.ENTER_PROPER_DISTANCE, "enter proper distance");
+                }
+                if (TimeInMinutes == 0)
+                {
+                    throw new cabInoviceException(cabInoviceException.ExceptionType.ENTER_PROPER_TIME, "enter proper time");
+                }
                 return Fair;
-            
+
+            }
+            catch(cabInoviceException e)
+            {
+                throw new cabInoviceException(cabInoviceException.ExceptionType.ENTER_PROPER_TIME, e.Message);
+            }
+
+
         }
        
     }

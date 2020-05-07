@@ -12,18 +12,67 @@ namespace TestForCabServices
         {
         }
         /// <summary>
+        /// check for 0 distance
+        /// </summary>
+         [Test]
+        public void checkForWrongDistanceInputException()
+        {
+            try
+            {
+                //check for single cap services
+                CabService service = new CabService(0, 15, 0, "suraj");
+                //total pay for single ride
+                int totalpay = service.getTotalFair();
+             
+            }
+            catch (cabInoviceException e)
+            {
+                Assert.AreEqual("enter proper distance", e.Message);
+            }
+
+        }
+        /// <summary>
+        /// check for o time
+        /// </summary>
+        [Test]
+        
+        public void checkForWrongTimeInput()
+        {
+            try
+            {
+                //check for single cap services
+                CabService service = new CabService(10, 0, 0, "suraj");
+                //total pay for single ride
+                int totalpay = service.getTotalFair();
+            
+            }
+            catch (cabInoviceException e)
+            {
+                Assert.AreEqual("enter proper time", e.Message);
+            }
+
+        }
+        /// <summary>
         /// total pay for single rides
         /// </summary>
         [Test]
 
         public void TestForTotalFairForNormalRide()
         {
-            //check for single cap services
-            CabService service = new CabService(10, 15,0,"suraj");
-            //total pay for single ride
-            int totalpay = service.getTotalFair();
-            //if equel the pass
-            Assert.AreEqual(115, totalpay);
+            try
+            {
+                //check for single cap services
+                CabService service = new CabService(10, 15, 0, "suraj");
+                //total pay for single ride
+                int totalpay = service.getTotalFair();
+                //if equel the pass
+                Assert.AreEqual(115, totalpay);
+            }
+            catch(cabInoviceException e)
+            {
+                Assert.AreEqual("enter proper time" , e.Message);
+            }
+           
         }
         /// <summary>
         /// total pay for single rides
@@ -32,12 +81,19 @@ namespace TestForCabServices
 
         public void TestForTotalFairForPremiumRide()
         {
-            //check for single cap services
-            CabService service = new CabService(10, 15, 1, "suraj");
-            //total pay for single ride
-            int totalpay = service.getTotalFair();
-            //if equel the pass
-            Assert.AreEqual(180, totalpay);
+            try
+            {
+                //check for single cap services
+                CabService service = new CabService(10, 15, 1, "suraj");
+                //total pay for single ride
+                int totalpay = service.getTotalFair();
+                //if equel the pass
+                Assert.AreEqual(180, totalpay);
+            }
+            catch (cabInoviceException e)
+            {
+                Assert.AreEqual("enter proper time", e.Message);
+            }
         }
      
 
